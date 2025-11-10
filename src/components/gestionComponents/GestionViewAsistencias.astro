@@ -1,0 +1,49 @@
+---
+import GestionCrudCard from "@/components/gestionComponents/GestionCrudButton.astro";
+
+import AsistenciaPorCurso from "@/components/gestionComponents/publicacionAsistencias/AsistenciaPorCurso.jsx";
+import AsistenciaPorMaestro from "@/components/gestionComponents/publicacionAsistencias/AsistenciaPorMaestro.jsx";
+---
+
+<main>
+  <div class="rounded-4xl p-8 h-full">
+    <h1 class="text-5xl font-bold mb-1">Publicación de asistencias</h1>
+    <p class="text-[20px] mb-4">Verificar los cursos y/o maestros que subieron la asistencia(Primera hora)</p>
+    <div class="w-full h-0.5 bg-gray-300"></div>
+
+    <div class="grid grid-rows-2 grid-cols-2 gap-6 mt-6">
+      <GestionCrudCard id="asistenciaPorCurso" title="Asistencia por curso" bgColor="#d14e11" />
+      <GestionCrudCard id="asistenciaPorMaestro" title="Asistencia por maestro" bgColor="#d1113a" />
+    </div>
+
+     <div id="crudContainer" class="mt-8 relative">
+      <div id="asistenciaPorCursoView" class="hidden">
+        <AsistenciaPorCurso client:load />
+      </div>
+      <div id="asistenciaPorMaestroView" class="hidden">
+        <AsistenciaPorMaestro client:load />
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script type="module">
+  const asistenciaPorCursoBtn = document.getElementById("asistenciaPorCurso");
+  const asistenciaPorMaestroBtn = document.getElementById("asistenciaPorMaestro");
+
+  const views = {
+    asistenciaPorCursoView: document.getElementById("asistenciaPorCursoView"),
+    asistenciaPorMaestroView: document.getElementById("asistenciaPorMaestroView"),
+  };
+
+  function showView(viewId) {
+    // Ocultar todos
+    Object.values(views).forEach(v => v.classList.add("hidden"));
+    // Mostrar el seleccionado
+    views[viewId].classList.remove("hidden");
+  }
+
+  asistenciaPorCursoBtn.addEventListener("click", () => showView("asistenciaPorCursoView"));
+  asistenciaPorMaestroBtn.addEventListener("click", () => showView("asistenciaPorMaestroView"));
+</script>

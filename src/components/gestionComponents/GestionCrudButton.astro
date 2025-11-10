@@ -1,0 +1,10 @@
+---
+    const { id, title = "Agregar retiro", bgColor="#ef4444" } = Astro.props;
+---
+
+<button
+    id={id}
+    style={`background-color: ${bgColor};`}
+    class={`text-white px-12 py-3 rounded-[15px] text-[22px] hover:scale-105 transition-transform duration-200 ease-in-out shadow-lg`}>
+    {title}
+</button>

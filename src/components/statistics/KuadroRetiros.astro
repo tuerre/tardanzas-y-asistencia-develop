@@ -1,0 +1,9 @@
+---
+    const { title = "Retiros" } = Astro.props;
+    const { amount = 2 } = Astro.props;
+---
+
+<div class="bg-[#1164d1] rounded-2xl p-6 w-[260px] h-[210px] flex flex-col justify-evenly items-end shadow-md">
+  <p class="text-gray-200 text-2xl">{title}</p>
+  <p class="text-gray-200 font-semibold text-5xl leading-none">{amount}</p>
+</div>

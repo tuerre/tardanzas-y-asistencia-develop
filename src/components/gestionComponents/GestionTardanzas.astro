@@ -1,0 +1,60 @@
+---
+import GestionCrudCard from "@/components/gestionComponents/GestionCrudButton.astro";
+
+import AgregarTardanza from "@/components/gestionComponents/tardanzasCRUD/AgregarTardanza.jsx";
+import EliminarTardanza from "@/components/gestionComponents/tardanzasCRUD/EliminarTardanza.jsx";
+import EditarTardanza from "@/components/gestionComponents/tardanzasCRUD/EditarTardanza.jsx";
+---
+
+<main>
+  <div class="rounded-4xl p-8 h-full">
+    <h1 class="text-5xl font-bold mb-1">Bienvenid@ nuevamente!</h1>
+    <p class="text-[20px] mb-4">Todo está listo para gestionar las tardanzas de hoy!</p>
+    <div class="w-full h-0.5 bg-gray-300"></div>
+
+    <!-- BOTONES -->
+    <div class="grid grid-rows-2 grid-cols-2 gap-6 mt-6">
+      <GestionCrudCard id="agregarTardanza" title="Agregar tardanza" bgColor="#d31039" />
+      <GestionCrudCard id="eliminarTardanza" title="Eliminar tardanza" bgColor="#d31039" />
+      <GestionCrudCard id="editarTardanza" title="Editar tardanza" bgColor="#d31039" />
+      <a href="#resumen" id="verTardanza" class="bg-[#d31039] text-white text-center px-12 py-3 rounded-[15px] text-[22px] hover:scale-105 transition-transform duration-200 ease-in-out shadow-lg">
+        Ver tardanzas
+      </a>
+    </div>
+
+    <div id="crudContainer" class="mt-8 relative">
+      <div id="agregarTardanzaView" class="block">
+        <AgregarTardanza client:load />
+      </div>
+      <div id="eliminarTardanzaView" class="hidden">
+        <EliminarTardanza client:load />
+      </div>
+      <div id="editarTardanzaView" class="hidden">
+        <EditarTardanza client:load />
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  const agregarTardanzaBtn = document.getElementById("agregarTardanza");
+  const eliminarTardanzaBtn = document.getElementById("eliminarTardanza");
+  const editarTardanzaBtn = document.getElementById("editarTardanza");
+
+  const views = {
+    agregarTardanzaView: document.getElementById("agregarTardanzaView"),
+    eliminarTardanzaView: document.getElementById("eliminarTardanzaView"),
+    editarTardanzaView: document.getElementById("editarTardanzaView"),
+  };
+
+  function showView(viewId) {
+    // Ocultar todos
+    Object.values(views).forEach(v => v.classList.add("hidden"));
+    // Mostrar el seleccionado
+    views[viewId].classList.remove("hidden");
+  }
+
+  agregarTardanzaBtn.addEventListener("click", () => showView("agregarTardanzaView"));
+  eliminarTardanzaBtn.addEventListener("click", () => showView("eliminarTardanzaView"));
+  editarTardanzaBtn.addEventListener("click", () => showView("editarTardanzaView"));
+</script>

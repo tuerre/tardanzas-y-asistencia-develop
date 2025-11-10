@@ -1,0 +1,65 @@
+---
+import GestionCrudCard from "@/components/gestionComponents/GestionCrudButton.astro";
+
+import AgregarTardanza from "@/components/gestionComponents/tardanzasCRUD/AgregarTardanza.jsx";
+import EliminarTardanza from "@/components/gestionComponents/tardanzasCRUD/EliminarTardanza.jsx";
+import EditarTardanza from "@/components/gestionComponents/tardanzasCRUD/EditarTardanza.jsx";
+
+// d31039
+// 089931
+// d37510
+// 123699
+---
+
+<main>
+  <div class="rounded-4xl p-8 h-full">
+    <h1 class="text-5xl font-bold mb-1">Retiro de estudiante</h1>
+    <p class="text-[20px] mb-4">Todo está listo para gestionar los retiros de hoy!</p>
+    <div class="w-full h-0.5 bg-gray-300"></div>
+
+    <!-- BOTONES -->
+    <div class="grid grid-rows-2 grid-cols-2 gap-6 mt-6">
+      <GestionCrudCard id="agregarRetiro" title="Agregar retiro" bgColor="#d31039" />
+      <GestionCrudCard id="eliminarRetiro" title="Eliminar retiro" bgColor="#d31039" />
+      <GestionCrudCard id="editarRetiro" title="Editar retiro" bgColor="#d31039" />
+      <a href="#resumen" id="verRetiro" class="bg-[#d31039] text-white text-center px-12 py-3 rounded-[15px] text-[22px] hover:scale-105 transition-transform duration-200 ease-in-out shadow-lg">
+        Ver retiros
+      </a>
+    </div>
+
+    <div id="crudContainer" class="mt-8 relative">
+      <div id="agregarRetiroView" class="block">
+        <AgregarTardanza textButton="Agregar Retiro" textTableTitle="Retiros" client:load />
+      </div>
+      <div id="eliminarRetiroView" class="hidden">
+        <EliminarTardanza textButton="Eliminar Retiro" client:load />
+      </div>
+      <div id="editarRetiroView" class="hidden">
+        <EditarTardanza textButton="Editar Retiro" client:load />
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  const agregarRetiroBtn = document.getElementById("agregarRetiro");
+  const eliminarRetiroBtn = document.getElementById("eliminarRetiro");
+  const editarRetiroBtn = document.getElementById("editarRetiro");
+
+  const views = {
+    agregarRetiroView: document.getElementById("agregarRetiroView"),
+    eliminarRetiroView: document.getElementById("eliminarRetiroView"),
+    editarRetiroView: document.getElementById("editarRetiroView"),
+  };
+
+  function showView(viewId) {
+    // Ocultar todos
+    Object.values(views).forEach(v => v.classList.add("hidden"));
+    // Mostrar el seleccionado
+    views[viewId].classList.remove("hidden");
+  }
+
+  agregarRetiroBtn.addEventListener("click", () => showView("agregarRetiroView"));
+  eliminarRetiroBtn.addEventListener("click", () => showView("eliminarRetiroView"));
+  editarRetiroBtn.addEventListener("click", () => showView("editarRetiroView"));
+</script>

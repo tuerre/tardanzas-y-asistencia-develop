@@ -1,0 +1,48 @@
+---
+import GestionResumen from "@/components/gestionComponents/GestionResumen.astro"
+import GestionTardanzas from "@/components/gestionComponents/GestionTardanzas.astro"
+import GestionRetiros from "@/components/gestionComponents/GestionRetiros.astro"
+import GestionReporte from "@/components/gestionComponents/GestionReporte.astro"
+import GestionViewAsistencias from "@/components/gestionComponents/GestionViewAsistencias.astro"
+---
+
+<div id="gestion-container" class="flex items-stretch overflow-y-auto rounded-4xl">
+  <div data-componente="dashboard" id="resumen" class="componente-activo flex-1">
+    <GestionResumen />
+  </div>
+
+  <div data-componente="tardanzas" id="tardanzas" class="hidden flex-1">
+    <GestionTardanzas />
+  </div>
+
+  <div data-componente="retiros" id="retiros" class="hidden flex-1">
+    <GestionRetiros />
+  </div>
+
+  <div data-componente="reporte" id="reporte" class="hidden flex-1">
+    <GestionReporte />
+  </div>
+
+  <div data-componente="asistencias" id="asistencias" class="hidden flex-1">
+    <GestionViewAsistencias />
+  </div>
+</div>
+
+<script type="module">
+  const botones = document.querySelectorAll(".menu-item")
+  const componentes = document.querySelectorAll("[data-componente]")
+
+  botones.forEach(boton => {
+    boton.addEventListener("click", () => {
+      // Ocultar todos los componentes
+      componentes.forEach(c => c.classList.add("hidden"))
+      
+      const section = boton.getAttribute("data-section")
+      const activo = document.querySelector(`[data-componente="${section}"]`)
+      if (activo) activo.classList.remove("hidden")
+
+      botones.forEach(b => b.classList.remove("font-bold", "text-[var(--color-primary)]"))
+      boton.classList.add("font-bold", "text-[var(--color-primary)]")
+    })
+  })
+</script>

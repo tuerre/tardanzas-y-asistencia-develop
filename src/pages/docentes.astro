@@ -1,8 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro"
+
+import DocentesSideBar from "../components/DocentesSideBar.astro"
+import DocentesMain from "../components/DocentesMain.astro"
 ---
 
 <Layout title="Asistencia de Docentes | ITESA">
-    <h1 class="text-3xl font-bold">Página de Docentes</h1>
-    <p>Aquí puedes gestionar la información de los docentes.</p>
+    <main class="p-16 min-h-screen flex justify-center">
+        <div class="w-full max-w-[1800px] min-h-full bg-[url('images/bg-login.webp')] bg-cover bg-center bg-no-repeat p-4 rounded-4xl shadow-lg flex gap-4 items-stretch">
+            <DocentesSideBar />
+            <DocentesMain client:load />
+        </div>
+</main>
 </Layout>

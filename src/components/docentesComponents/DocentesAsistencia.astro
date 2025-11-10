@@ -1,0 +1,15 @@
+---
+    import SubirAsistencia from "@/components/docentesComponents/SubirAsistencia.jsx"
+---
+
+<main>
+    <div class="rounded-4xl p-8 w-full h-full">
+        <h1 class="text-4xl font-bold mb-1">Bienvenid@ devuelta! ¿Qué tal?</h1>
+        <p class="text-[20px] mb-4">Todo está listo para subir las asistencias de hoy!</p>
+        <div class="w-full h-0.5 bg-gray-300"></div>
+
+        <div class="flex flex-col md:flex-row gap-8 mt-7">
+            <SubirAsistencia client:load />
+        </div>
+    </div>
+</main>

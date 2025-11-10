@@ -1,0 +1,39 @@
+---
+ import MisAsistencias from "@/components/docentesComponents/MisAsistencias.jsx"
+---
+
+<main>
+  <div class="rounded-4xl p-8 h-full">
+    <h1 class="text-4xl font-bold mb-1">Consultar mis asistencias</h1>
+    <p class="text-[19px] mb-4">Aquí puede ver las asistencias que ha publicado. También puede editar un pase de lista.</p>
+    <div class="w-full h-0.5 bg-gray-300"></div>
+
+     <div class="flex flex-col md:flex-row gap-8 mt-7">
+            <MisAsistencias client:load />
+      </div>
+
+  </div>
+</main>
+
+<script type="module">
+  const agregarTardanzaBtn = document.getElementById("agregarTardanza");
+  const eliminarTardanzaBtn = document.getElementById("eliminarTardanza");
+  const editarTardanzaBtn = document.getElementById("editarTardanza");
+
+  const views = {
+    agregarTardanzaView: document.getElementById("agregarTardanzaView"),
+    eliminarTardanzaView: document.getElementById("eliminarTardanzaView"),
+    editarTardanzaView: document.getElementById("editarTardanzaView"),
+  };
+
+  function showView(viewId) {
+    // Ocultar todos
+    Object.values(views).forEach(v => v.classList.add("hidden"));
+    // Mostrar el seleccionado
+    views[viewId].classList.remove("hidden");
+  }
+
+  agregarTardanzaBtn.addEventListener("click", () => showView("agregarTardanzaView"));
+  eliminarTardanzaBtn.addEventListener("click", () => showView("eliminarTardanzaView"));
+  editarTardanzaBtn.addEventListener("click", () => showView("editarTardanzaView"));
+</script>

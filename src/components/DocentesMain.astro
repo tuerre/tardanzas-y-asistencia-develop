@@ -1,0 +1,33 @@
+---
+import DocentesAsistencia from "@/components/docentesComponents/DocentesAsistencia.astro"
+import DocentesMisAsistencias from "@/components/docentesComponents/DocentesMisAsistencias.astro"
+---
+
+<div id="gestion-container" class="flex items-stretch overflow-y-auto rounded-4xl">
+  <div data-componente="asistencia" id="asistencia" class="componente-activo flex-1">
+    <DocentesAsistencia />
+  </div>
+
+  <div data-componente="mis-asistencias" id="mis-asistencias" class="hidden flex-1">
+    <DocentesMisAsistencias />
+  </div>
+</div>
+
+<script type="module">
+  const botones = document.querySelectorAll(".menu-item")
+  const componentes = document.querySelectorAll("[data-componente]")
+
+  botones.forEach(boton => {
+    boton.addEventListener("click", () => {
+      // Ocultar todos los componentes
+      componentes.forEach(c => c.classList.add("hidden"))
+      
+      const section = boton.getAttribute("data-section")
+      const activo = document.querySelector(`[data-componente="${section}"]`)
+      if (activo) activo.classList.remove("hidden")
+
+      botones.forEach(b => b.classList.remove("font-bold", "text-[var(--color-primary)]"))
+      boton.classList.add("font-bold", "text-[var(--color-primary)]")
+    })
+  })
+</script>

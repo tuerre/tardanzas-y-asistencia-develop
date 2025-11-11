@@ -1,0 +1,60 @@
+---
+import GestionCrudCard from "@/components/gestionComponents/GestionCrudButton.astro";
+
+import AgregarTardanza from "@/components/gestionComponents/tardanzasCRUD/AgregarTardanza.jsx";
+import EliminarTardanza from "@/components/gestionComponents/tardanzasCRUD/EliminarTardanza.jsx";
+import EditarTardanza from "@/components/gestionComponents/tardanzasCRUD/EditarTardanza.jsx";
+---
+
+<main>
+  <div class="rounded-4xl p-8 h-full">
+    <h1 class="text-5xl font-bold mb-1">Bienvenid@ nuevamente!</h1>
+    <p class="text-[20px] mb-4">Todo está listo para gestionar las ausencias de hoy!</p>
+    <div class="w-full h-0.5 bg-gray-300"></div>
+
+    <!-- BOTONES -->
+    <div class="grid grid-rows-2 grid-cols-2 gap-6 mt-6">
+      <GestionCrudCard id="agregarAusencia" title="Agregar ausencia" bgColor="#d31039" />
+      <GestionCrudCard id="eliminarAusencia" title="Eliminar ausencia" bgColor="#d31039" />
+      <GestionCrudCard id="editarAusencia" title="Editar ausencia" bgColor="#d31039" />
+      <a href="#resumen" id="verAusencia" class="bg-[#d31039] text-white text-center px-12 py-3 rounded-[15px] text-[22px] hover:scale-105 transition-transform duration-200 ease-in-out shadow-lg">
+        Ver ausencias
+      </a>
+    </div>
+
+    <div id="crudContainer" class="mt-8 relative">
+      <div id="agregarAusenciaView" class="block">
+        <AgregarTardanza textButton="Agregar ausencia" client:load />
+      </div>
+      <div id="eliminarAusenciaView" class="hidden">
+        <EliminarTardanza textButton="Eliminar ausencia" client:load />
+      </div>
+      <div id="editarAusenciaView" class="hidden">
+        <EditarTardanza textButton="Editar ausencia" client:load />
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  const agregarTardanzaBtn = document.getElementById("agregarAusencia");
+  const eliminarTardanzaBtn = document.getElementById("eliminarAusencia");
+  const editarTardanzaBtn = document.getElementById("editarAusencia");
+
+  const views = {
+    agregarTardanzaView: document.getElementById("agregarAusenciaView"),
+    eliminarTardanzaView: document.getElementById("eliminarAusenciaView"),
+    editarTardanzaView: document.getElementById("editarAusenciaView"),
+  };
+
+  function showView(viewId) {
+    // Ocultar todos
+    Object.values(views).forEach(v => v.classList.add("hidden"));
+    // Mostrar el seleccionado
+    views[viewId].classList.remove("hidden");
+  }
+
+  agregarTardanzaBtn.addEventListener("click", () => showView("agregarTardanzaView"));
+  eliminarTardanzaBtn.addEventListener("click", () => showView("eliminarTardanzaView"));
+  editarTardanzaBtn.addEventListener("click", () => showView("editarTardanzaView"));
+</script>
